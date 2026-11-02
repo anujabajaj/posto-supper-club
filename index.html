@@ -101,23 +101,23 @@ p{margin:0;max-width:68ch}
 <script id="app">
 (function(){
 var EVENT={date:new Date(2026,10,7),dateText:"Saturday 7 November 2026",time:"3:30pm – 5:30pm",venue:"The Green Room, 143b Ditchling Road, Brighton BN1 6JA",price:"£38 per person",byob:"BYOB"};
-var P={anuja:'<span class="chip c-anuja">AB</span>',amrita:'<span class="chip c-amrita">AS</span>',toby:'<span class="chip c-toby">Toby</span>',both:'<span class="chip c-both">Both</span>'};
+var P={anuja:'<span class="chip c-anuja">Anuja</span>',amrita:'<span class="chip c-amrita">Amrita</span>',toby:'<span class="chip c-toby">Toby</span>',both:'<span class="chip c-both">Both</span>'};
 function flag(t){return '<span class="chip c-flag">'+t+'</span>'}
 
 var COURSES=[
  {n:1,dish:"Mango lassi shot",desc:"Creamy, refreshing, a hint of cardamom",cook:[["anuja","Lassi"]],plate:"anuja",serve:"Shot glasses",notes:"Pour and chill before doors.",flags:["Dairy"],veg:"V"},
- {n:2,dish:"Punjabi mathri",desc:"Crisp, spiced and flaky, with mint & coriander",cook:[["amrita","Mathri, tamarind (imli) chutney"],["anuja","Green chutney, yogurt, pomegranate, nylon sev"]],plate:"anuja",serve:"Pattal / donge (leaf plates)",notes:"AB assembles the topping during service.",flags:["Gluten","Dairy"],veg:"V"},
+ {n:2,dish:"Punjabi mathri",desc:"Crisp, spiced and flaky, with mint & coriander",cook:[["amrita","Mathri, tamarind (imli) chutney"],["anuja","Green chutney, yogurt, pomegranate, nylon sev"]],plate:"anuja",serve:"Pattal / donge (leaf plates)",notes:"Anuja assembles the topping during service.",flags:["Gluten","Dairy"],veg:"V"},
  {n:3,dish:"Chicken 65 bites",desc:"Fiery, crisp and addictive",cook:[["amrita","Chicken 65"]],plate:"amrita",serve:"Cones",notes:"No oven at the venue: fry at home, re-crisp in a pan. Needs a veg swap (paneer or gobi 65).",flags:["Chicken","Check batter: egg / gluten"],veg:"Meat"},
- {n:4,dish:"Delhi gol gappe",desc:"Crisp puris, spiced water, potato & chickpea filling",cook:[["amrita","Spiced pani"]],cook2:[["anuja","Puris, aloo-chana filling, boondi, chutneys"]],plate:"anuja",serve:"Gravy boat (pani) + steel bowl",notes:"AS to check the steel bowls work.",flags:["Gluten"],veg:"V"},
- {n:5,dish:"Pav bhaji fondue",desc:"Mumbai street comfort, toasted pav dippers",cook:[["amrita","Bhaji, toasted mini brioche"]],plate:"amrita",serve:"Skewers + AB's individual bowls",notes:"Toast the brioche at home or in a dry pan.",flags:["Gluten","Dairy","Egg (brioche)"],veg:"V"},
+ {n:4,dish:"Delhi gol gappe",desc:"Crisp puris, spiced water, potato & chickpea filling",cook:[["amrita","Spiced pani"]],cook2:[["anuja","Puris, aloo-chana filling, boondi, chutneys"]],plate:"anuja",serve:"Gravy boat (pani) + steel bowl",notes:"Amrita to check the steel bowls work.",flags:["Gluten"],veg:"V"},
+ {n:5,dish:"Pav bhaji fondue",desc:"Mumbai street comfort, toasted pav dippers",cook:[["amrita","Bhaji, toasted mini brioche"]],plate:"amrita",serve:"Skewers + Anuja's individual bowls",notes:"Toast the brioche at home or in a dry pan.",flags:["Gluten","Dairy","Egg (brioche)"],veg:"V"},
  {n:6,dish:"Spiced pumpkin shorba",desc:"Warm, aromatic and soul-soothing",cook:[["amrita","Shorba"]],cook2:[["anuja","Croutons"]],plate:"anuja",serve:"Shot glasses, crouton on a cocktail stick",notes:"Course 1 glasses, washed in the dishwasher in between. Check if cream is used.",flags:["Gluten (crouton)","Check dairy"],veg:"V"},
- {n:7,dish:"Slow cooked lamb taco",desc:"Rich masala lamb, pickled onions, herb chutney",cook:[["amrita","Lamb, pickled onions, herb chutney, mini taco wraps"]],plate:"amrita",serve:"Boats",notes:"AB starts the chai now. Needs a veg swap (jackfruit or mushroom).",flags:["Lamb","Gluten (wraps)"],veg:"Meat"},
+ {n:7,dish:"Slow cooked lamb taco",desc:"Rich masala lamb, pickled onions, herb chutney",cook:[["amrita","Lamb, pickled onions, herb chutney, mini taco wraps"]],plate:"amrita",serve:"Boats",notes:"Anuja starts the chai now. Needs a veg swap (jackfruit or mushroom).",flags:["Lamb","Gluten (wraps)"],veg:"Meat"},
  {n:8,dish:"Mishti pulao – raita",desc:"Sweet saffron rice with nuts, cooling raita",cook:[["anuja","Pulao and raita"]],plate:"anuja",serve:"Pattal",notes:"Reheat in the microwave. Keep a nut-free portion aside if needed.",flags:["Nuts","Dairy"],veg:"V"},
  {n:9,dish:"Barfi",desc:"Homemade, fudge-like",cook:[["anuja","Barfi"]],plate:"amrita",serve:"One sharing plate in the middle",notes:"Served with chai in kulhads.",flags:["Dairy","Check nuts"],veg:"V"}
 ];
 
 var SHOP={
- amrita:[["s-am-1","Mini brioche","for pav bhaji"],["s-am-2","Mini taco wraps",""],["s-am-3","Wooden skewers",""],["s-am-4","Cones",""],["s-am-5","Boats",""],["s-am-6","Fake tealights",""],["s-am-7","Imli (tamarind) chutney",""],["s-am-8","Steel bowls","send AB pictures first"]],
+ amrita:[["s-am-1","Mini brioche","for pav bhaji"],["s-am-2","Mini taco wraps",""],["s-am-3","Wooden skewers",""],["s-am-4","Cones",""],["s-am-5","Boats",""],["s-am-6","Fake tealights",""],["s-am-7","Imli (tamarind) chutney",""],["s-am-8","Steel bowls","send Anuja pictures first"]],
  anuja:[["s-an-1","Cocktail sticks","for the crouton on the shorba shots"],["s-an-2","Gravy boats",""],["s-an-3","Boondi",""],["s-an-4","Green chutney",""],["s-an-5","Gol gappe puris",""],["s-an-6","Kulhads","for chai"],["s-an-7","Pav bhaji masala",""],["s-an-8","Fake marigold flowers",""],["s-an-9","Dried mango",""],["s-an-10","Pomegranate",""],["s-an-11","Nylon sev",""],["s-an-12","White bowls",""],["s-an-13","Donge / pattal (leaf plates)","for courses 2 and 8, check Amazon"],["s-an-14","Chai ingredients",""],["s-an-15","Aprons ×3",""]]
 };
 
@@ -150,8 +150,9 @@ var RUN=[
  {day:"Saturday 7 November (suggested timings)"},
  ["13:00","At home: fry the chicken 65 and toast the brioche. Everything else is already prepped"],
  ["14:00","Pack cool boxes in course order. Lassi in a jug"],
- ["14:30","Toby loads the car. Leave for The Green Room"],
- ["15:00","Arrive. AS puts shorba and bhaji on to warm. AB sets up the plating line"],
+ ["14:15","Anuja and Toby load the car"],
+ ["14:30","Anuja and Toby pick up Amrita from home, then drive to The Green Room"],
+ ["15:00","Arrive. Amrita puts shorba and bhaji on to warm. Anuja sets up the plating line"],
  ["15:00","Toby lays tables: marigolds, tealights, menu and allergen cards, glasses"],
  ["15:20","Pour lassi shots. Aprons on. Quick photo of the table"],
  ["15:30","Doors open. Toby takes coats and opens bottles"],
@@ -161,7 +162,7 @@ var RUN=[
  ["16:10","4 · Delhi gol gappe",1],
  ["16:22","5 · Pav bhaji fondue",1],
  ["16:35","6 · Spiced pumpkin shorba",1],
- ["16:47","7 · Slow cooked lamb taco. AB starts the chai",1],
+ ["16:47","7 · Slow cooked lamb taco. Anuja starts the chai",1],
  ["17:00","8 · Mishti pulao – raita",1],
  ["17:13","9 · Barfi with chai in kulhads",1],
  ["17:25","Thank you, group photo, ask guests to tag @postokitchenbtn"],
@@ -212,16 +213,16 @@ function render(){
  +'<span class="count">'+countText()+'</span></header>'
  +'<nav class="toc" aria-label="Sections"><div class="in"><a href="#overview">Overview</a><a href="#menu">Menu &amp; who</a><a href="#shopping">Shopping</a><a href="#todo">To-do</a><a href="#day">On the day</a><a href="#message">Guest message</a><a href="#dietary">Dietary form</a><a href="#questions">Open questions</a></div></nav>'
  +'<section id="overview"><div class="sec-head"><h2>Where we are</h2><span class="status'+(statusRO?' ro':'')+'" id="status">'+esc(statusText)+'</span></div>'
- +'<div class="summary">'+meter("To-do",TASKS)+meter("AS's shopping",SHOP.amrita,1)+meter("AB's shopping",SHOP.anuja)+meter("All shopping",all,1)+'</div>'
+ +'<div class="summary">'+meter("To-do",TASKS)+meter("Amrita's shopping",SHOP.amrita,1)+meter("Anuja's shopping",SHOP.anuja)+meter("All shopping",all,1)+'</div>'
  +'<p class="muted">Tick things off here. Every tick is saved for both of us.</p></section>'
  +'<section id="menu"><div class="sec-head"><h2>Menu &amp; who does what</h2></div>'
- +'<div class="legend">'+P.anuja+P.amrita+'<span>AB = Anuja, AS = Amrita (ASB on the handwritten notes = AB).</span></div>'
+ +'<div class="legend">'+P.anuja+P.amrita+'<span>From the handwritten notes: ASB = Anuja, Amrita = Amrita.</span></div>'
  +'<div class="tablewrap"><table><thead><tr><th>#</th><th>Course</th><th>Cooking</th><th>Plating</th><th>Serve in</th><th>Diet &amp; allergens</th><th>Notes</th></tr></thead><tbody>'+c+'</tbody></table></div>'
  +'<p class="note">The venue has plates, cutlery, a dishwasher, one portable hob and a microwave. There is no oven, so everything arrives cooked and only needs reheating or assembling.</p>'
  +'<p class="note warn">Allergen tags are our best guess from the dish names. Check them against your recipes before the allergen cards go out.</p></section>'
  +'<section id="shopping"><div class="sec-head"><h2>Shopping &amp; serveware</h2></div><div class="grid2">'
- +'<div class="card"><div class="card-head"><h3>AS</h3><span class="mono muted">'+cnt(ids(SHOP.amrita))+'/'+SHOP.amrita.length+'</span></div>'+checklist(SHOP.amrita)+'</div>'
- +'<div class="card"><div class="card-head"><h3>AB</h3><span class="mono muted">'+cnt(ids(SHOP.anuja))+'/'+SHOP.anuja.length+'</span></div>'+checklist(SHOP.anuja)+'</div></div></section>'
+ +'<div class="card"><div class="card-head"><h3>Amrita</h3><span class="mono muted">'+cnt(ids(SHOP.amrita))+'/'+SHOP.amrita.length+'</span></div>'+checklist(SHOP.amrita)+'</div>'
+ +'<div class="card"><div class="card-head"><h3>Anuja</h3><span class="mono muted">'+cnt(ids(SHOP.anuja))+'/'+SHOP.anuja.length+'</span></div>'+checklist(SHOP.anuja)+'</div></div></section>'
  +'<section id="todo"><div class="sec-head"><h2>To-do before the day</h2><span class="mono muted">'+cnt(ids(TASKS))+'/'+TASKS.length+'</span></div><div class="card">'+checklist(TASKS,true)+'</div></section>'
  +'<section id="day"><div class="sec-head"><h2>On the day</h2></div><p class="muted">We only get in at 3pm, so courses start at 3:40 and run about 12 minutes each. One hob: shorba and bhaji share it, then the chai. The lamb and pulao go in the microwave.</p><div class="run">'+run+'</div></section>'
  +'<section id="message"><div class="sec-head"><h2>Guest message</h2><button type="button" id="copy">Copy message</button></div>'
