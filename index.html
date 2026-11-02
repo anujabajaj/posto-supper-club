@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<title>Posto Supper Club Hub</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style id="css">
+/* Layout: one column run-sheet, sticky section nav, menu as a ledger table, checklists in two-up grids that stack on phones */
+:root{
+  --bg:#FBFAF7; --surface:#FFFFFF; --ink:#1B1A17; --muted:#6B665C; --line:#E3DFD6;
+  --marigold:#C77800; --marigold-text:#8F5600; --marigold-soft:#FBEFD9;
+  --green:#2F5D50; --green-soft:#E3EEEA; --warn:#A23B2A; --warn-soft:#F8E6E2;
+  --display:"Marcellus",Georgia,serif; --body:"Karla",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141311; --surface:#1D1B18; --ink:#EDEAE3; --muted:#A39D90; --line:#34312B;
+  --marigold:#F0A63A; --marigold-text:#F3B65A; --marigold-soft:#3A2A12;
+  --green:#7FB8A4; --green-soft:#1C2E28; --warn:#F08A76; --warn-soft:#3A1E19; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141311; --surface:#1D1B18; --ink:#EDEAE3; --muted:#A39D90; --line:#34312B;
+  --marigold:#F0A63A; --marigold-text:#F3B65A; --marigold-soft:#3A2A12;
+  --green:#7FB8A4; --green-soft:#1C2E28; --warn:#F08A76; --warn-soft:#3A1E19; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3.1rem);line-height:1.05;letter-spacing:.01em}
+h2{font-size:1.65rem}
+h3{font-size:1.15rem}
+.eyebrow{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--marigold-text);font-weight:700}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+header.hero{display:grid;gap:14px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.95rem}
+.facts b{font-weight:700}
+.count{display:inline-flex;align-items:baseline;gap:8px;background:var(--marigold-soft);color:var(--marigold-text);padding:6px 12px;border-radius:999px;font-weight:700;width:fit-content}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-bottom:8px}
+nav.toc .in{display:flex;gap:4px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.toc a{white-space:nowrap;color:var(--ink);text-decoration:none;padding:6px 10px;border-radius:6px;font-size:.9rem}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--marigold-soft);outline:none}
+section{padding-top:36px;display:grid;gap:16px;scroll-margin-top:56px}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px}
+.status{font-size:.85rem;color:var(--muted);min-height:1.3em}
+.status.ro{color:var(--warn)}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.meter{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:8px}
+.meter .n{font-family:var(--mono);font-size:1.3rem}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--marigold)}
+.bar.g i{background:var(--green)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.no{font-family:var(--display);font-size:1.5rem;line-height:1;width:44px}
+.dish{font-weight:700}
+.chip{display:inline-block;font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap;margin:1px 2px 1px 0}
+.c-anuja{background:var(--marigold-soft);color:var(--marigold-text)}
+.c-amrita{background:var(--green-soft);color:var(--green)}
+.c-both{border:1px solid var(--ink);color:var(--ink)}
+.c-toby{background:var(--line);color:var(--ink)}
+.c-flag{background:var(--warn-soft);color:var(--warn)}
+.who-line{display:block;margin-top:3px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.85rem;color:var(--muted);align-items:center}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px;min-width:0}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+ul.check{list-style:none;margin:0;padding:0;display:grid}
+ul.check li{border-top:1px solid var(--line)}
+ul.check li:first-child{border-top:0}
+ul.check label{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;padding:8px 0;cursor:pointer}
+ul.check input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--marigold)}
+ul.check .done .t{text-decoration:line-through;color:var(--muted)}
+.t small{display:block;color:var(--muted);font-size:.82rem}
+.due{font-family:var(--mono);font-size:.78rem;color:var(--muted);white-space:nowrap;padding-top:2px}
+.ro-mode ul.check label{cursor:default}
+.run{display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.run .row{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:8px 0 8px 16px;position:relative}
+.run .row::before{content:"";position:absolute;left:-6px;top:15px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--muted)}
+.run .row.course::before{background:var(--marigold);border-color:var(--marigold)}
+.run .time{font-family:var(--mono);font-size:.9rem;padding-top:1px}
+.daylabel{font-family:var(--display);font-size:1.15rem;margin:18px 0 4px}
+.msg{white-space:pre-wrap;font-family:var(--body);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;margin:0;font-size:.95rem;max-height:520px;overflow:auto}
+button{font:inherit;font-weight:700;border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;cursor:pointer}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--marigold);outline-offset:2px}
+.note{background:var(--marigold-soft);border-radius:10px;padding:12px 14px;font-size:.92rem}
+.note.warn{background:var(--warn-soft)}
+ol.q{margin:0;padding-left:1.3em;display:grid;gap:10px}
+ol.q li small{color:var(--muted);display:block}
+p{margin:0;max-width:68ch}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<main id="root"><div class="wrap"><p class="muted">Loading the Posto Kitchen plan…</p></div></main>
+<script id="app">
+(function(){
+var EVENT={date:new Date(2026,10,7),dateText:"Saturday 7 November 2026",time:"3:30pm – 5:30pm",venue:"The Green Room, 143b Ditchling Road, Brighton BN1 6JA",price:"£38 per person",byob:"BYOB"};
+var P={anuja:'<span class="chip c-anuja">AB</span>',amrita:'<span class="chip c-amrita">AS</span>',toby:'<span class="chip c-toby">Toby</span>',both:'<span class="chip c-both">Both</span>'};
+function flag(t){return '<span class="chip c-flag">'+t+'</span>'}
+
+var COURSES=[
+ {n:1,dish:"Mango lassi shot",desc:"Creamy, refreshing, a hint of cardamom",cook:[["anuja","Lassi"]],plate:"anuja",serve:"Shot glasses",notes:"Pour and chill before doors.",flags:["Dairy"],veg:"V"},
+ {n:2,dish:"Punjabi mathri",desc:"Crisp, spiced and flaky, with mint & coriander",cook:[["amrita","Mathri, tamarind (imli) chutney"],["anuja","Green chutney, yogurt, pomegranate, nylon sev"]],plate:"anuja",serve:"Pattal / donge (leaf plates)",notes:"AB assembles the topping during service.",flags:["Gluten","Dairy"],veg:"V"},
+ {n:3,dish:"Chicken 65 bites",desc:"Fiery, crisp and addictive",cook:[["amrita","Chicken 65"]],plate:"amrita",serve:"Cones",notes:"No oven at the venue: fry at home, re-crisp in a pan. Needs a veg swap (paneer or gobi 65).",flags:["Chicken","Check batter: egg / gluten"],veg:"Meat"},
+ {n:4,dish:"Delhi gol gappe",desc:"Crisp puris, spiced water, potato & chickpea filling",cook:[["amrita","Spiced pani"]],cook2:[["anuja","Puris, aloo-chana filling, boondi, chutneys"]],plate:"anuja",serve:"Gravy boat (pani) + steel bowl",notes:"AS to check the steel bowls work.",flags:["Gluten"],veg:"V"},
+ {n:5,dish:"Pav bhaji fondue",desc:"Mumbai street comfort, toasted pav dippers",cook:[["amrita","Bhaji, toasted mini brioche"]],plate:"amrita",serve:"Skewers + AB's individual bowls",notes:"Toast the brioche at home or in a dry pan.",flags:["Gluten","Dairy","Egg (brioche)"],veg:"V"},
+ {n:6,dish:"Spiced pumpkin shorba",desc:"Warm, aromatic and soul-soothing",cook:[["amrita","Shorba"]],cook2:[["anuja","Croutons"]],plate:"anuja",serve:"Shot glasses, crouton on a cocktail stick",notes:"Course 1 glasses, washed in the dishwasher in between. Check if cream is used.",flags:["Gluten (crouton)","Check dairy"],veg:"V"},
+ {n:7,dish:"Slow cooked lamb taco",desc:"Rich masala lamb, pickled onions, herb chutney",cook:[["amrita","Lamb, pickled onions, herb chutney, mini taco wraps"]],plate:"amrita",serve:"Boats",notes:"AB starts the chai now. Needs a veg swap (jackfruit or mushroom).",flags:["Lamb","Gluten (wraps)"],veg:"Meat"},
+ {n:8,dish:"Mishti pulao – raita",desc:"Sweet saffron rice with nuts, cooling raita",cook:[["anuja","Pulao and raita"]],plate:"anuja",serve:"Pattal",notes:"Reheat in the microwave. Keep a nut-free portion aside if needed.",flags:["Nuts","Dairy"],veg:"V"},
+ {n:9,dish:"Barfi",desc:"Homemade, fudge-like",cook:[["anuja","Barfi"]],plate:"amrita",serve:"One sharing plate in the middle",notes:"Served with chai in kulhads.",flags:["Dairy","Check nuts"],veg:"V"}
+];
+
+var SHOP={
+ amrita:[["s-am-1","Mini brioche","for pav bhaji"],["s-am-2","Mini taco wraps",""],["s-am-3","Wooden skewers",""],["s-am-4","Cones",""],["s-am-5","Boats",""],["s-am-6","Fake tealights",""],["s-am-7","Imli (tamarind) chutney",""],["s-am-8","Steel bowls","send AB pictures first"]],
+ anuja:[["s-an-1","Cocktail sticks","for the crouton on the shorba shots"],["s-an-2","Gravy boats",""],["s-an-3","Boondi",""],["s-an-4","Green chutney",""],["s-an-5","Gol gappe puris",""],["s-an-6","Kulhads","for chai"],["s-an-7","Pav bhaji masala",""],["s-an-8","Fake marigold flowers",""],["s-an-9","Dried mango",""],["s-an-10","Pomegranate",""],["s-an-11","Nylon sev",""],["s-an-12","White bowls",""],["s-an-13","Donge / pattal (leaf plates)","for courses 2 and 8, check Amazon"],["s-an-14","Chai ingredients",""],["s-an-15","Aprons ×3",""]]
+};
+
+var TASKS=[
+ ["t-1","Send guest message with Eventbrite link","anuja","Mon 2 Nov","WhatsApp text below"],
+ ["t-2","Set up the dietary form and share the link","anuja","Mon 2 Nov","or add the question to Eventbrite checkout"],
+ ["t-3","Promote on Instagram","both","Mon 2 – Fri 6 Nov","menu post, then a stories countdown"],
+ ["t-4","Chase anyone who hasn't booked or replied","both","Wed 4 Nov",""],
+ ["t-5","Close dietary replies and plan swaps","both","Wed 4 Nov","veg swaps for courses 3 and 7"],
+ ["t-6","Confirm final headcount","both","Thu 5 Nov","15 expected, 17 seats max: cook 17 portions"],
+ ["t-18","Bring a second portable hob or an air fryer","both","Fri 6 Nov","venue has one portable hob and a microwave, no oven"],
+ ["t-8","Check the steel bowls work for gol gappe and send pictures","amrita","Tue 3 Nov",""],
+ ["t-19","Get 17 shot glasses, plus a few spares","both","Thu 5 Nov","washed between courses 1 and 6"],
+ ["t-23","Make croutons for the shorba","anuja","Fri 6 Nov","keep in an airtight tub"],
+ ["t-24","Find out if the venue has wine glasses","anuja","Wed 4 Nov","if not, bring 17"],
+ ["t-9","Write allergen cards for the table","anuja","Thu 5 Nov","nuts, gluten, dairy, egg"],
+ ["t-10","Print menu cards","anuja","Thu 5 Nov","reuse the launch poster"],
+ ["t-11","Pack wine glasses, corkscrews, bottle openers, ice","both","Fri 6 Nov","the venue hasn't mentioned glasses; the guest message promises these"],
+ ["t-12","Pack water jugs, napkins, bin bags, tea towels, containers","both","Fri 6 Nov","plates, cutlery and a dishwasher are at the venue"],
+ ["t-21","Brief Toby: coats, opening bottles, running plates, clearing","anuja","Fri 6 Nov",""],
+ ["t-22","Portion everything into labelled tubs, packed in course order","both","Fri 6 Nov","so service can start 40 minutes after we arrive"],
+ ["t-13","Make barfi and mathri","both","Thu 5 – Fri 6 Nov","both keep well"],
+ ["t-14","Make chutneys, pani, pickled onions, aloo filling","both","Fri 6 Nov",""],
+ ["t-15","Slow cook the lamb","amrita","Fri 6 Nov","reheats well, saves Saturday"],
+ ["t-16","Charge phones and set up a photo spot for Instagram","both","Sat 7 Nov",""],
+ ["t-17","Send thank-you and ask for feedback","both","Sun 8 Nov","3 questions: favourite dish, price, would you come back"]
+];
+
+var RUN=[
+ {day:"Saturday 7 November (suggested timings)"},
+ ["13:00","At home: fry the chicken 65 and toast the brioche. Everything else is already prepped"],
+ ["14:00","Pack cool boxes in course order. Lassi in a jug"],
+ ["14:30","Toby loads the car. Leave for The Green Room"],
+ ["15:00","Arrive. AS puts shorba and bhaji on to warm. AB sets up the plating line"],
+ ["15:00","Toby lays tables: marigolds, tealights, menu and allergen cards, glasses"],
+ ["15:20","Pour lassi shots. Aprons on. Quick photo of the table"],
+ ["15:30","Doors open. Toby takes coats and opens bottles"],
+ ["15:40","1 · Mango lassi shot + welcome",1],
+ ["15:50","2 · Punjabi mathri",1],
+ ["16:00","3 · Chicken 65 bites. Toby puts the lassi shot glasses through the dishwasher",1],
+ ["16:10","4 · Delhi gol gappe",1],
+ ["16:22","5 · Pav bhaji fondue",1],
+ ["16:35","6 · Spiced pumpkin shorba",1],
+ ["16:47","7 · Slow cooked lamb taco. AB starts the chai",1],
+ ["17:00","8 · Mishti pulao – raita",1],
+ ["17:13","9 · Barfi with chai in kulhads",1],
+ ["17:25","Thank you, group photo, ask guests to tag @postokitchenbtn"],
+ ["17:30","Guests leave. Dishwasher on, pack up"]
+];
+
+var MESSAGE="Hi everyone! 🪔\n\nAmrita and I are so excited to welcome you to the very first *Posto Kitchen Supper Club*, a 9-course Indian tasting menu cooked by us.\n\n📅 *Saturday 7th November, 3:30–5:30pm*\n📍 The Green Room, 143b Ditchling Road, Brighton BN1 6JA\n🎟️ £38 per person\n🍷 BYOB\n\nIf you haven't yet, please book your ticket here so we know numbers for the kitchen:\n👉 https://www.eventbrite.co.uk/e/posto-kitchen-launch-and-tasting-tickets-1999866909762?aff=oddtdtcreator\n\nAnd please fill in this 1-minute form with any dietary requirements or allergies by *Wednesday 4th November*:\n👉 https://forms.gle/jUdCwUTPVADV7vrK9\n\n*What to bring 🍾*\nThe menu goes from cool and creamy to properly fiery and back again, so aromatic, slightly off-dry whites and light, chilled reds work best. Big oaky or tannic wines will fight the spice.\n\n🥂 *To start:* Sussex sparkling (Ridgeview, Rathfinny or Nyetimber). Lovely with the mathri and chicken 65.\n🥂 *White:* off-dry German Riesling (Kabinett), Alsace Gewürztraminer or Pinot Gris, or an Austrian Grüner Veltliner. These handle the spice, gol gappe and pumpkin shorba.\n🌸 *Rosé:* a dry Provence or English rosé.\n🍷 *Red:* chilled Beaujolais (Gamay) or a light Pinot Noir for the pav bhaji and lamb taco.\n🍺 *Beer:* a crisp lager like Kingfisher or Cobra, a Belgian wheat beer, or a local pale ale from Brighton Bier or Unbarred.\n🍯 *With the barfi:* Moscato d'Asti or a late-harvest Riesling.\n\nFor something special, pop into *Butlers Wine Cellar* in Kemp Town (88 St George's Road, BN2 1EE). Tell them it's for a spicy Indian tasting menu and they'll find you the perfect bottle.\n\nWe'll have glasses, openers and ice ready, so just bring your bottles.\n\nCan't wait to feed you!\nAnuja & Amrita x\n@postokitchenbtn";
+
+var FORM=[
+ ["Your name","Short answer, required"],
+ ["Names of anyone else on your booking","Short answer"],
+ ["Do any of you have dietary requirements?","Checkboxes: None · Vegetarian · Vegan · Pescatarian · No lamb · No chicken · Halal meat only · Gluten-free · Dairy-free · Other"],
+ ["Any allergies?","Checkboxes: None · Tree nuts · Peanuts · Dairy · Gluten / wheat · Egg · Sesame · Mustard · Other. Add a note: \"The menu includes nuts, dairy and gluten, and we cook in a shared kitchen.\""],
+ ["How severe is the allergy?","Multiple choice: Preference · Intolerance · Allergy (avoid in the dish) · Severe (no trace / carries an EpiPen)"],
+ ["How do you like your spice?","Linear scale 1–3: Gentle · Medium · Bring the heat"],
+ ["Anything else we should know?","Paragraph: access needs, celebrations, seating"]
+];
+
+// Paste the Google Apps Script web app URL here (see README.md)
+var SHEET_URL="";
+
+var state={done:{}};
+var readOnly=false,statusText="",statusRO=false;
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]})}
+function daysTo(){var t=new Date();t.setHours(0,0,0,0);return Math.round((EVENT.date-t)/864e5)}
+function countText(){var d=daysTo();if(d>1)return d+" days to go";if(d===1)return "Tomorrow";if(d===0)return "Tonight's the night";return "Done. Well cooked!"}
+function cnt(ids){var n=0;ids.forEach(function(i){if(state.done[i])n++});return n}
+function ids(list){return list.map(function(x){return x[0]})}
+function meter(label,list,g){var d=cnt(ids(list)),t=list.length,p=t?Math.round(d/t*100):0;
+ return '<div class="meter"><span class="eyebrow">'+label+'</span><span class="n">'+d+' / '+t+'</span><div class="bar'+(g?' g':'')+'"><i style="width:'+p+'%"></i></div></div>'}
+function checklist(list,showWho){return '<ul class="check">'+list.map(function(x){var on=!!state.done[x[0]];
+ var who=showWho?P[x[2]]:'';var due=showWho?x[3]:'';var note=showWho?x[4]:x[2];
+ return '<li class="'+(on?'done':'')+'"><label for="'+x[0]+'"><input type="checkbox" id="'+x[0]+'" data-id="'+x[0]+'"'+(on?' checked':'')+(readOnly?' disabled':'')+'><span class="t">'+esc(x[1])+(note?'<small>'+esc(note)+'</small>':'')+'</span><span class="due">'+(who)+(due?'<br>'+esc(due):'')+'</span></label></li>'}).join('')+'</ul>'}
+
+function render(){
+ var root=document.getElementById("root");
+ var c=COURSES.map(function(r){
+  var who=r.cook.concat(r.cook2||[]).map(function(k){return '<span class="who-line">'+P[k[0]]+' '+esc(k[1])+'</span>'}).join('');
+  return '<tr><td class="no">'+r.n+'</td><td><div class="dish">'+esc(r.dish)+'</div><div class="muted">'+esc(r.desc)+'</div></td><td>'+who+'</td><td>'+P[r.plate]+'</td><td>'+esc(r.serve)+'</td><td>'+(r.veg==="Meat"?flag("Meat"):'<span class="chip c-amrita">Veg</span>')+r.flags.map(flag).join('')+'</td><td class="muted">'+esc(r.notes)+'</td></tr>'}).join('');
+ var run=RUN.map(function(r){if(r.day)return '<div class="daylabel">'+esc(r.day)+'</div>';
+  return '<div class="row'+(r[2]?' course':'')+'"><span class="time">'+r[0]+'</span><span>'+esc(r[1])+'</span></div>'}).join('');
+ var all=SHOP.amrita.concat(SHOP.anuja);
+ root.innerHTML='<div class="wrap'+(readOnly?' ro-mode':'')+'">'
+ +'<header class="hero"><span class="eyebrow">Posto Kitchen · Supper Club launch · friends &amp; family</span><h1>Supper club plan</h1>'
+ +'<div class="facts"><span><b>'+EVENT.dateText+'</b></span><span class="mono">'+EVENT.time+'</span><span>'+esc(EVENT.venue)+'</span><span>'+EVENT.price+' · '+EVENT.byob+'</span><span>15 guests expected · 17 seats max</span><span>Venue access from <b class="mono">3:00pm</b></span></div>'
+ +'<div class="legend">Team: '+P.anuja+P.amrita+'cooking and plating · '+P.toby+'serving and drinks</div>'
+ +'<span class="count">'+countText()+'</span></header>'
+ +'<nav class="toc" aria-label="Sections"><div class="in"><a href="#overview">Overview</a><a href="#menu">Menu &amp; who</a><a href="#shopping">Shopping</a><a href="#todo">To-do</a><a href="#day">On the day</a><a href="#message">Guest message</a><a href="#dietary">Dietary form</a><a href="#questions">Open questions</a></div></nav>'
+ +'<section id="overview"><div class="sec-head"><h2>Where we are</h2><span class="status'+(statusRO?' ro':'')+'" id="status">'+esc(statusText)+'</span></div>'
+ +'<div class="summary">'+meter("To-do",TASKS)+meter("AS's shopping",SHOP.amrita,1)+meter("AB's shopping",SHOP.anuja)+meter("All shopping",all,1)+'</div>'
+ +'<p class="muted">Tick things off here. Every tick is saved for both of us.</p></section>'
+ +'<section id="menu"><div class="sec-head"><h2>Menu &amp; who does what</h2></div>'
+ +'<div class="legend">'+P.anuja+P.amrita+'<span>AB = Anuja, AS = Amrita (ASB on the handwritten notes = AB).</span></div>'
+ +'<div class="tablewrap"><table><thead><tr><th>#</th><th>Course</th><th>Cooking</th><th>Plating</th><th>Serve in</th><th>Diet &amp; allergens</th><th>Notes</th></tr></thead><tbody>'+c+'</tbody></table></div>'
+ +'<p class="note">The venue has plates, cutlery, a dishwasher, one portable hob and a microwave. There is no oven, so everything arrives cooked and only needs reheating or assembling.</p>'
+ +'<p class="note warn">Allergen tags are our best guess from the dish names. Check them against your recipes before the allergen cards go out.</p></section>'
+ +'<section id="shopping"><div class="sec-head"><h2>Shopping &amp; serveware</h2></div><div class="grid2">'
+ +'<div class="card"><div class="card-head"><h3>AS</h3><span class="mono muted">'+cnt(ids(SHOP.amrita))+'/'+SHOP.amrita.length+'</span></div>'+checklist(SHOP.amrita)+'</div>'
+ +'<div class="card"><div class="card-head"><h3>AB</h3><span class="mono muted">'+cnt(ids(SHOP.anuja))+'/'+SHOP.anuja.length+'</span></div>'+checklist(SHOP.anuja)+'</div></div></section>'
+ +'<section id="todo"><div class="sec-head"><h2>To-do before the day</h2><span class="mono muted">'+cnt(ids(TASKS))+'/'+TASKS.length+'</span></div><div class="card">'+checklist(TASKS,true)+'</div></section>'
+ +'<section id="day"><div class="sec-head"><h2>On the day</h2></div><p class="muted">We only get in at 3pm, so courses start at 3:40 and run about 12 minutes each. One hob: shorba and bhaji share it, then the chai. The lamb and pulao go in the microwave.</p><div class="run">'+run+'</div></section>'
+ +'<section id="message"><div class="sec-head"><h2>Guest message</h2><button type="button" id="copy">Copy message</button></div>'
+ +'<p class="muted">Ready to send. In WhatsApp, *stars* turn into bold.</p><pre class="msg" id="msgtext">'+esc(MESSAGE)+'</pre>'
+ +'<p class="note">Butlers Wine Cellar has moved from Queens Park Road to its Kemp Town shop at 88 St George\'s Road (01273 698724). Our sources are from 2022, so give them a quick call to check before sending.</p></section>'
+ +'<section id="dietary"><div class="sec-head"><h2>Dietary form</h2></div>'
+ +'<p>Live form: <a href="https://forms.gle/jUdCwUTPVADV7vrK9">forms.gle/jUdCwUTPVADV7vrK9</a>. Replies collect in the Responses tab of the form.</p>'
+ +'<div class="card"><h3>Title: Posto Kitchen Supper Club, 7 Nov: dietary requirements</h3><p class="muted">Description: Help us cook for you! Please reply by Wednesday 4 November.</p><ol class="q">'+FORM.map(function(q){return '<li>'+esc(q[0])+'<small>'+esc(q[1])+'</small></li>'}).join('')+'</ol></div>'
+ +'<p class="note">Quicker option: in Eventbrite, go to <b>Manage event → Order options → Order form</b> and add a required question "Dietary requirements or allergies". Everyone who books answers it, and the answers appear in the attendee report.</p></section>'
+ +'<section id="questions"><div class="sec-head"><h2>Open questions</h2></div><div class="card"><ul class="check">'
+ +['Does the venue have wine glasses? Still finding out'].map(function(q){return '<li><label style="grid-template-columns:1fr"><span class="t">'+q+'</span></label></li>'}).join('')
+ +'</ul></div></section></div>';
+ bind();
+}
+
+function setStatus(t,ro){statusText=t;statusRO=!!ro;var el=document.getElementById("status");if(el){el.textContent=t;el.className="status"+(ro?" ro":"")}}
+
+function bind(){
+ document.querySelectorAll('input[data-id]').forEach(function(cb){cb.addEventListener("change",function(){
+  if(readOnly)return;var id=cb.getAttribute("data-id");
+  if(cb.checked)state.done[id]=true;else delete state.done[id];
+  render();save(id,cb.checked)})});
+ var b=document.getElementById("copy");if(b)b.addEventListener("click",function(){
+  var done=function(){b.textContent="Copied";setTimeout(function(){b.textContent="Copy message"},1800)};
+  var sel=function(){var r=document.createRange();r.selectNodeContents(document.getElementById("msgtext"));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected: press Ctrl+C"};
+  try{navigator.clipboard.writeText(MESSAGE).then(done,sel)}catch(e){sel()}});
+}
+
+var LABELS={};
+SHOP.amrita.concat(SHOP.anuja,TASKS).forEach(function(x){LABELS[x[0]]=x[1]});
+
+function setDone(d){state={done:d||{}};render()}
+
+function load(quiet){
+ if(!SHEET_URL){setStatus("Not connected to the Google Sheet yet: ticks won't be shared.",true);return}
+ if(!quiet)setStatus("Loading ticks…");
+ fetch(SHEET_URL,{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){
+  var keep=statusText;setDone(d.done);setStatus(quiet?keep:"Up to date")
+ }).catch(function(){setStatus("Couldn't reach the Google Sheet. Check your connection and refresh.",true)});
+}
+
+var pending=0;
+function save(id,on){
+ if(!SHEET_URL){setStatus("Not connected to the Google Sheet yet: this tick won't be shared.",true);return}
+ pending++;setStatus("Saving…");
+ fetch(SHEET_URL,{method:"POST",body:JSON.stringify({id:id,item:LABELS[id]||id,done:on})})
+  .then(function(r){return r.json()}).then(function(d){pending--;if(!pending){setDone(d.done);setStatus("Saved")}})
+  .catch(function(){pending--;if(on)delete state.done[id];else state.done[id]=true;render();setStatus("Couldn't save that tick. Try again.",true)});
+}
+
+render();
+load();
+setInterval(function(){if(!pending&&document.visibilityState==="visible")load(true)},30000);
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"&&!pending)load(true)});
+})();
+</script>
+</body>
+</html>
